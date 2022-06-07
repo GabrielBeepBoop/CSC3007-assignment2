@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Assignment 02</title>
+    <script src="http://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+    <!--CSS Script-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head> 
+<body>
+<h2>Assignment 02</h2>
+<p>Types of Serious Crime for the year:
+<select id="year" onchange="UpdateChart()">
+  <option value="2020">2020</option>
+  <option value="2019" >2019</option>
+  <option value="2018">2018</option>
+  <option value="2017">2017</option>
+  <option value="2016">2016</option>
+  <option value="2015">2015</option>
+  <option value="2014">2014</option>
+  <option value="2013">2013</option>
+  <option value="2012">2012</option>
+  <option value="2011">2011</option>
+</select>
+</p>
+<!-- Create a div where the graph will take place -->
+<div id="myChart"></div>
+</body>
+<script type="text/javascript" src="chart.js" ></script> 
+</html>
