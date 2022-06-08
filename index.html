@@ -3,10 +3,12 @@
 <head>
     <title>Assignment 02</title>
     <script src="http://d3js.org/d3.v6.min.js" charset="utf-8"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <!--CSS Script-->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head> 
 <body>
+  <div id="box">
 <h2>Assignment 02</h2>
 <p>Types of Serious Crime for the year:
 <select id="year" onchange="UpdateChart()">
@@ -24,6 +26,7 @@
 </p>
 <!-- Create a div where the graph will take place -->
 <div id="myChart"></div>
+</div>
 </body>
 <script type="text/javascript" src="chart.js" ></script> 
 </html>

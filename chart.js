@@ -1,12 +1,14 @@
 var values = []; //hold all the data
 var result = []; //hold the filtered data
+var colors = ['red', 'green', 'blue', 'orange', 'yellow']; //Random array of colors
+var url = "https://data.gov.sg/api/action/datastore_search?resource_id=83c21090-bd19-4b54-ab6b-d999c251edcf&limit=100";
 var x = '2020';
 var y;
 var svg;
 var height;
 
   fetchCrimeData = async () => {
-  await fetch("https://data.gov.sg/api/action/datastore_search?resource_id=83c21090-bd19-4b54-ab6b-d999c251edcf&limit=100")
+  await fetch(url)
   .then(result => result.json())
   .then((dataset) => {
     values = [];
@@ -65,23 +67,32 @@ var height;
     //Remove the old bar when updating
     d3.selectAll(".bar").remove();
 
-    svg.selectAll(".bar")
+    var u = svg.selectAll("rect")
     .data(result)
-    .enter().append("rect")
-    .attr("class", "bar")
+
+  u
+    .enter()
+    .append("rect")
+    .merge(u)
     .transition()
     .duration(1000)
-    .attr("x", function(d) { return x(d.offence) + 40; })
-    .attr("width", 50)
+    .attr("x", function(d) { return x(d.offence) +40; })
     .attr("y", function(d) { return y(d.value); })
+    .attr("width", "65")
     .attr("height", function(d) { return 570 - y(d.value); })
+    .attr("fill", "black")
 
-    svg.on("mouseover", function(d) {
-      d3.select(this).style("fill", "#71c776");
-    })                  
-    .on("mouseout", function(d) {
-      d3.select(this).style("fill", "#d6065c");
-    });
+
+   // Add interaction
+   svg.selectAll("rect")
+   .on("mouseover", function (d) {
+     //Return a random color during mouseover
+    d3.select(this).attr("fill", colors[Math.floor(Math.random() * colors.length)]);
+  })
+  .on("mouseout", function () {
+    d3.select(this).attr("fill", "black");
+  });
+
 
     //Add text to the bars
     svg.selectAll("text.bar")
@@ -90,9 +101,11 @@ var height;
     .append("text")
     .attr("class", "bar")
     .attr("text-anchor", "middle")
-    .attr("x", function(d) { return x(d.offence) + 55; })
+    .attr("x", function(d) { return x(d.offence) + 65; })
     .attr("y", function(d) { return y(d.value) - 10; })
-    .text(function(d) { return d.value; });
+    .text(function(d) { return d.value; })
+    .style("fill", "black")
+    .style("font-size", "150%")
 }
 
 //For the first time when the page loads
