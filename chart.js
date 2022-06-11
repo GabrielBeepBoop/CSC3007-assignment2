@@ -29,6 +29,9 @@ var height;
   async function DrawAxes(){
     await fetchCrimeData();
 
+    svg = d3.select("svg")
+    .attr("viewBox", "0 0 " + width + " " + height)
+
     var margin = {top: 10, right: 20, bottom: 20, left: 60},
     width = 1700 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
